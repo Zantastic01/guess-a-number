@@ -2,7 +2,7 @@ import random
 
 # config
 low = 1
-high = 1000
+high = 100
 
 
 # helper functions
@@ -18,15 +18,18 @@ def get_guess(current_low, current_high):
     """
     Return a truncated average of current low and high.
     """
-    pass
+
+    guess =(current_low + current_high)//2
+
+    return guess
 
 def pick_number():
-    """
-    Ask the player to think of a number between low and high.
-    Then  wait until the player presses enter.
-    """
-    pass
 
+    print("Think of a number between " + str(low) + " and " + str(high) + " then Press the ENTER key to continue.")
+    
+    contine = input()
+        
+    
 def check_guess(guess):
     """
     Computer will ask if guess was too high, low, or correct.
@@ -34,8 +37,18 @@ def check_guess(guess):
     Returns -1 if the guess was too low
              0 if the guess was correct
              1 if the guess was too high
-    """
+    """ 
 
+    answer = input("Is the number " + str(guess) + " too high, too low, or correct ")
+
+    if answer == "too high" or answer == "high":
+        return 1
+    if answer == "too low" or answer == "low":
+        return -1
+
+    if answer == "correct":
+        return 0
+          
 def show_result():
     """
     Says the result of the game. (The computer might always win.)
@@ -59,19 +72,19 @@ def play():
     check = -1
     
     pick_number()
-    
-    while check != 0:
-        guess = get_guess(current_low, current_high)
-        check = check_guess(guess)
 
-        if check == -1:
+    while check != "correct":
+            guess = get_guess(current_low, current_high)
+            check = check_guess(guess)
+
+    if check == "too low":
             # adjust current_low
-            pass
-        elif check == 1:
+            current_low = guess + 1
+    elif check == "too high":
             # adjust current_high
-            pass
+            current_high = guess - 1
 
-    show_result(guess, rand)
+    show_result()
 
 
 # Game starts running here
