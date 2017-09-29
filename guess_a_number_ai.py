@@ -26,8 +26,8 @@ def get_guess(current_low, current_high):
 def pick_number():
 
     print("Think of a number between " + str(low) + " and " + str(high) + " then Press the ENTER key to continue.")
-    
-    contine = input()
+
+    con = input()
         
     
 def check_guess(guess):
@@ -40,14 +40,21 @@ def check_guess(guess):
     """ 
 
     answer = input("Is the number " + str(guess) + " too high, too low, or correct ")
-
-    if answer == "too high" or answer == "high":
+    
+    if answer == 'too high' or answer == 'high':
         return 1
-    if answer == "too low" or answer == "low":
+    
+         
+    if answer == 'too low' or answer == 'low':
         return -1
 
-    if answer == "correct":
+
+    if answer == 'correct':
         return 0
+
+
+
+
           
 def show_result():
     """
@@ -73,14 +80,14 @@ def play():
     
     pick_number()
 
-    while check != "correct":
-            guess = get_guess(current_low, current_high)
-            check = check_guess(guess)
+    while check != 0:
+        guess = get_guess(current_low, current_high)
+        check = check_guess(guess)
 
-    if check == "too low":
+        if check == -1:
             # adjust current_low
             current_low = guess + 1
-    elif check == "too high":
+        elif check == 1:
             # adjust current_high
             current_high = guess - 1
 
